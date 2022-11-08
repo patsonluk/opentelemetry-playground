@@ -19,8 +19,12 @@ This is NOT going to be our final approach, but adding a java agent exporter for
 3. This builds our exporter in `target/fs-opentelemetry-exporter-1.0-SNAPSHOT-jar-with-dependencies.jar`
 
 ### Run an OT instrumented java webapp
-1. `cd jetty-helloworld-webapp`
+1. In another terminal, `cd jetty-helloworld-webapp`
 2. `MAVEN_OPTS="-javaagent:../opentelemetry-javaagent.jar -Dotel.traces.exporter=fullstory -Dotel.javaagent.extensions=../fs-opentelemetry-exporter/target/fs-opentelemetry-exporter-1.0-SNAPSHOT-jar-with-dependencies.jar -Dotel.exporter.fullstory.api-key=<staging API key>" mvn jetty:run-war`
 3. A java app server should be bound to localhost:8080. There's only one endpoint that would trigger a DB read and a test exception `localhost:8080/test-servlet`
 
+
+At this point you should have 2 apps running, the localhost:1234 should have both Fullstory recording and OT instrumetnation enabled. And the localhost:8080 should have OT java agent instrumentation.
+
+The button in localhost:1234 basically calls localhost:8080/test-servlet
 
