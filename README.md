@@ -20,13 +20,15 @@ This is NOT going to be our final approach, but adding a java agent exporter for
 
 ### Run an OT instrumented java webapp
 1. In another terminal, `cd jetty-helloworld-webapp`
-2. `MAVEN_OPTS="-javaagent:../opentelemetry-javaagent.jar -Dotel.traces.exporter=fullstory -Dotel.javaagent.extensions=../fs-opentelemetry-exporter/target/fs-opentelemetry-exporter-1.0-SNAPSHOT-jar-with-dependencies.jar -Dotel.exporter.fullstory.api-key=<staging API key>" mvn jetty:run-war`
-3. A java app server should be bound to localhost:8080. There's only one endpoint that would trigger a DB read and a test exception `localhost:8080/test-servlet`
+2. `MAVEN_OPTS="-javaagent:../opentelemetry-javaagent.jar -Dotel.traces.exporter=fullstory -Dotel.javaagent.extensions=../fs-opentelemetry-exporter/target/fs-opentelemetry-exporter-1.0-SNAPSHOT-jar-with-dependencies.jar -Dotel.exporter.fullstory.api-key=<staging API key>" mvn jetty:run-war  -Djetty.port=9999`
+3. A java app server should be bound to localhost:9999. There's only one endpoint that would trigger a DB read and a test exception `localhost:9999/test-servlet`
+
+:information_source: This used to be 8080 but it appears to conflict with some ports for FS service restarts
 
 ## Trigger instrumentation
-At this point you should have 2 apps running, the localhost:1234 should have both Fullstory recording and OT instrumetnation enabled. And the localhost:8080 should have OT java agent instrumentation.
+At this point you should have 2 apps running, the localhost:1234 should have both Fullstory recording and OT instrumetnation enabled. And the localhost:9999 should have OT java agent instrumentation.
 
-Visit localhost:1234 with the developer tool in browser, goto the network tab, click on the `Click me` button on the page. You should observe an outbound xml http call to localhost:8080/test-servlet. Inspect the request header, you should see the `traceparent` being injected by the OT instrumentation, and `tracestate` (not injected by OT now, but ideally it should!) with FS identities
+Visit localhost:1234 with the developer tool in browser, goto the network tab, click on the `Click me` button on the page. You should observe an outbound xml http call to localhost:9999/test-servlet. Inspect the request header, you should see the `traceparent` being injected by the OT instrumentation, and `tracestate` (not injected by OT now, but ideally it should!) with FS identities
 ![image](https://user-images.githubusercontent.com/2895902/200657394-f34675c7-915b-45eb-ab6b-7f694f3947d8.png)
 
 It should have 500 response code, as localhost:8080/test-servlet simulates Db reads and unhandled exception.
