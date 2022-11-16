@@ -8,7 +8,10 @@ function ajaxCall(url) {
                 headers: { "tracestate" : tracestate},
 	    success: function(data, status) {
       alert("Data: " + data + "\nStatus: " + status);
-	}
+	},
+       error: function(xhr, ajaxOptions, thrownError) {
+	alert("error: " + xhr.responseText);
+       }
 });
 
 }

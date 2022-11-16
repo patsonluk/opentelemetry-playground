@@ -20,7 +20,7 @@ registerInstrumentations({
     new XMLHttpRequestInstrumentation({
       propagateTraceHeaderCorsUrls: [ 
 //        'http://localhost:8080', 
-      new RegExp('http:\/\/localhost:8080\.*/')
+      new RegExp('http:\/\/localhost:.*/')
       ],
     }),
   ],

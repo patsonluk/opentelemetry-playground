@@ -18,6 +18,10 @@
 
 package com.example;
 
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -29,33 +33,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.concurrent.TimeUnit;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/test-servlet"}, loadOnStartup = 1)
-public class HelloWorldServlet extends HttpServlet
+@WebServlet(urlPatterns = {"/sleep"}, loadOnStartup = 1)
+public class SleepServlet extends HttpServlet
 {
   @Override 
   public void doGet(HttpServletRequest request, HttpServletResponse response) 
       throws IOException
   {
       try {
-          doHttpGet("https://www.fullstory.com/");
-          doHttpGet("https://developers.google.com/apis-explorer");
-          String sleepUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + "/sleep";
-          doHttpGet(sleepUrl);
-          doDb();
+          TimeUnit.SECONDS.sleep(3);
       } catch (Exception e) {
           response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
           response.getOutputStream().print("Some internal server error...");
           throw new RuntimeException(e);
       }
-      response.getOutputStream().print("Hello World");
+      response.getOutputStream().print("slept for a while!");
   }
 
     private void doHttpGet(String uri) throws IOException, InterruptedException, URISyntaxException {

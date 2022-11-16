@@ -18,9 +18,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="main.js"></script>
 <script>
-window['_fs_host'] = 'staging.fullstory.com';
-window['_fs_script'] = 'edge.staging.fullstory.com/s/fs.js';
-window['_fs_org'] = '6XMR';
+window['_fs_host'] = 'fullstory.test:8043';
+window['_fs_script'] = 'edge.fullstory.test:8043/s/fs.js';
+window['_fs_org'] = 'local';
 window['_fs_namespace'] = 'FS';
 (function(m,n,e,t,l,o,g,y){
     if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
@@ -42,7 +42,8 @@ window['_fs_namespace'] = 'FS';
 </script>
 </head>
 <body>
-  <button type="button" onclick="ajaxCall('http://localhost:8080/test-servlet')">Click Me!</button>
+  <button type="button" onclick="ajaxCall('http://localhost:9999/test-servlet')">Click Me for AJAX!</button>
+  <div>Or just a link to <a href="test-link">back to the same page</a></div>
   <script type="module" src="document-load.js"></script>
 </body>
 
