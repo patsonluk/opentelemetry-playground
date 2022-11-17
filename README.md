@@ -13,7 +13,7 @@ This starts a test nodejs app on localhost:1234 with the opentelemetry browser i
 
 ### Run an OT instrumented java webapp
 1. In another terminal, `cd jetty-helloworld-webapp`
-2. `MAVEN_OPTS="-javaagent:../opentelemetry-javaagent.jar mvn jetty:run-war -Djetty.port=9999`
+2. `MAVEN_OPTS="-javaagent:../opentelemetry-javaagent.jar" mvn jetty:run-war -Djetty.port=9999`
 3. A java app server should be bound to localhost:9999. There's only one endpoint that would trigger a DB read and a test exception `localhost:9999/test-servlet`
 
 ### Compile a test agent exporter (Not needing this anymore - skip!!!)
