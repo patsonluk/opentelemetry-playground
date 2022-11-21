@@ -1,4 +1,4 @@
-# opentelemetry-playground
+A sample node js app that sends XHR to an OpenTelemetry instrumented java backend.
 
 ## Setup
 Prereq : need to have npm, java and maven installed
