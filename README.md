@@ -18,6 +18,9 @@ This starts a test nodejs app on localhost:1234 with the opentelemetry browser i
 
 :information_source: If using the test Java agent exporter below, then start the java app with this instead `MAVEN_OPTS="-javaagent:../opentelemetry-javaagent.jar -Dotel.traces.exporter=fullstory -Dotel.javaagent.extensions=../fs-opentelemetry-exporter/target/fs-opentelemetry-exporter-1.0-SNAPSHOT-jar-with-dependencies.jar -Dotel.exporter.fullstory.api-key=<staging API key>" mvn jetty:run-war  -Djetty.port=9999`
 
+### Run the modified OT collector that exports FS server events
+Follow this https://github.com/patsonluk/opentelemetry-collector/blob/main/README.md
+
 ### Compile a test Java agent exporter (Not needing this anymore - skip!!!)
 This is NOT going to be our final approach, but adding a java agent exporter for quick test. We probably want to setup an Otel collector and provide our exporter implementation so we are not tied to any server language/agent. https://opentelemetry.io/docs/collector/
 
