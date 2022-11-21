@@ -42,7 +42,7 @@ Visit localhost:1234 with the developer tool in browser, goto the network tab, c
 
 It should have 500 response code, as localhost:9999/test-servlet simulates Db reads and unhandled exception.
 
-Now goto the corresponding FS account on staging, we should be able to see the FS session and some server events in there. **It seems very buggy now, there could be time drift and throttling/quota issue**
+Now goto the corresponding FS account on staging, we should be able to see the FS session and some server events in there. **there could be time drift and throttling/quota issue**
 
 ![image](https://user-images.githubusercontent.com/2895902/200657802-2c4f59aa-1a24-4be8-8452-02cdf42cbea8.png)
 
